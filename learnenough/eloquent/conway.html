@@ -1,0 +1,117 @@
+<!doctype html>
+<script src="code/promise.js"></script>
+
+<div id="grid"></div>
+<div id="initial">
+  <input id='width' placeholder='Width' />
+  <input id='height' placeholder='Height' />
+  <button id='enter'>Make Muh Grid!</button>
+</div>
+
+<script>
+  
+  // Initialize variables that hold the DOM elements
+  
+  var grid = document.querySelector('#grid');
+  var initial = document.querySelector('#initial');
+  var enter = document.querySelector('#enter');
+  var button = document.createElement('button');
+  button.innerText = 'Next generation';
+  var auto = document.createElement('button');
+  auto.innerText = 'Auto Run';
+  
+  
+  
+  // This function initially populates the grid with a random outlay of checks
+  
+  function popGrid(prev) {
+    var width = document.querySelector('#width').value;
+  	var height = document.querySelector('#height').value;
+    for (var i=0; i<height; i++) {
+      for (var j=0; j<width; j++) {
+        var cell = document.createElement('input');
+        cell.setAttribute('type', 'checkbox');
+        cell.setAttribute('x', j);
+        cell.setAttribute('y', i);
+        if (Math.random() > 0.65) cell.defaultChecked = true;
+        
+        grid.appendChild(cell);
+      }
+      grid.innerHTML = grid.innerHTML + '<br />';
+    }
+  }
+  
+  // This function moves the game forward one turn
+  
+  function turn() {
+    var elements = grid.childNodes;
+    
+    // These loops determine how many neighbors a box has, plus itself if applicable
+    
+    for (var element in elements) {
+      var count = 0;
+      var el = elements[element];
+      if (el.type == 'checkbox') {
+        var x = el.getAttribute('x');
+        var y = el.getAttribute('y');
+        for (var element in elements) {
+          var neighbor = elements[element];
+          if (neighbor.type == 'checkbox') {
+            var nx = neighbor.getAttribute('x');
+            var ny = neighbor.getAttribute('y');
+            if (x - nx <= 1 && x - nx >= -1 && y - ny >= -1 && y - ny <= 1) {
+              if (neighbor.checked) count++;
+            }
+          }
+        }
+      }
+      
+      // This implements the rules of the game to set a switch attribute
+      
+      if (el.checked) {
+        count--;
+        if (count < 2 || count > 3) el.switch = true;
+      }
+      if (!el.checked && count == 3) el.switch = true;
+    }
+    
+    // This loop completes the turn by switching the necessary boxes
+    
+    for (var element in elements) {
+      var el = elements[element];
+      if (el.type == 'checkbox' && el.switch) {
+        if (el.checked) el.checked = false;
+        else el.checked = true;
+      }
+      el.switch = false;
+    }
+  }
+  
+  // This button gets rid of the input fields and adds the grid and control buttons 
+  
+  enter.addEventListener('click', function() {
+    popGrid();
+    document.body.appendChild(button);
+    document.body.appendChild(auto);
+    while (initial.firstChild) initial.removeChild(initial.firstChild);
+  });
+  
+  button.addEventListener('click', function() {
+    turn();
+  });
+  
+  // This is the auto run button
+  
+  var running;
+  auto.addEventListener('click', function() {
+    if (running) {
+      clearInterval(running);
+      running = 0;
+      auto.innerText = "Auto Run";
+    } else {
+      running = setInterval(turn, 500);
+      auto.innerText = "Stop";
+    }
+  });
+  
+</script>
