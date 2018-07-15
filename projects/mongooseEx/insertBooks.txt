@@ -1,0 +1,17 @@
+db.books.insert({
+  title: 'Refactoring the DOM',
+  author: 'Joe Blow',
+  category: 'Tech'
+})
+
+db.books.insert({
+  title: 'Learn Colloquial Speech',
+  author: 'Amy Sue John-Deere',
+  category: 'Humanitites'
+})
+
+db.books.insert({
+  title: 'Brain Study',
+  author: 'Marvin Einstein',
+  category: 'Health'
+})

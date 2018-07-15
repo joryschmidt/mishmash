@@ -1,0 +1,12 @@
+
+  var domain = "https://api.login.yahoo.com/oauth2/request_auth/";
+  var client_id = "dj0yJmk9OFFUdGFXTW1GME1wJmQ9WVdrOWJteE5WbXBNTjJFbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1kMg--";
+  var response_type = "token";
+  var redirect_uri = "http://express-joryschmidt.c9users.io/fantasy";
+    
+  var url = domain + "?client_id=" + client_id + "&response_type=" + response_type + "&redirect_uri=" + redirect_uri;
+  
+  http.get(url, function(err, data) {
+    if (err) console.log(err);
+    console.log(data); 
+  });
