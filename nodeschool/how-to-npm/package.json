@@ -1,0 +1,26 @@
+{
+  "name": "@joryschmidt/how-to-npm",
+  "version": "1.0.1",
+  "description": "Example project",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/joryschmidt/example_project_npm.git"
+  },
+  "keywords": [
+    "example",
+    "project"
+  ],
+  "author": "joryschmidt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joryschmidt/example_project_npm/issues"
+  },
+  "homepage": "https://github.com/joryschmidt/example_project_npm#readme",
+  "dependencies": {
+    "@linclark/pkg": "^1.0.2"
+  }
+}

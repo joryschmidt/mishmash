@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>AngularJS Binding</title>
+  </head>
+  <body>
+    
+    <div ng-app="thinkster" ng-controller="ListController as list">
+      <p ng-repeat="message in list.messageList">{{ message.id }}: {{ message.text }}</p>
+      <input ng-model="list.message" /><button ng-click="list.addMessage(list.message)">Add Message</button>
+    </div>
+    
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>

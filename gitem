@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git add -A
+git commit -m "$1"
+branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+git push origin $branch
